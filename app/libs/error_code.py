@@ -30,3 +30,24 @@ class ParameterException(APIException):
     code = 400
     msg = 'invalid parameter'
     error_code = 1000
+
+
+class WXException(APIException):
+    """微信内部异常"""
+    code = 500
+    msg = "WeChat exception, It's not our problem"
+    error_code = 5000
+
+
+class AuthFailed(APIException):
+    """token授权异常"""
+    code = 401
+    msg = 'authorization failed'
+    error_code = 1005
+
+
+class Forbidden(APIException):
+    """禁止访问"""
+    code = 403
+    msg = 'forbidden, not in scope'
+    error_code = 1004

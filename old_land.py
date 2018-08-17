@@ -14,7 +14,7 @@ app = create_app()
 @app.errorhandler(Exception)
 def framework_error(e):
     if isinstance(e, APIException):
-        raise e
+        return e
     elif isinstance(e, HTTPException):
         code = e.code
         msg = e.description

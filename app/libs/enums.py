@@ -10,3 +10,11 @@ class ClassicEnums(Enum):
     CLASSIC_MOVIE = 100
     CLASSIC_MUSIC = 200
     CLASSIC_SENTENCE = 300
+
+
+class ClientTypeEnum(Enum):
+    """客户端类型枚举类"""
+    USER_EMAIL = 100
+    USER_MOBILE = 101
+    USER_MINA = 200  # 微信小程序
+    USER_WX = 201  # 微信公众号

@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from flask import Blueprint
 
-from app.api.v1 import classic, book
+from app.api.v1 import classic, book, token, client, like
 
 __author__ = 'Colorful'
 __date__ = '2018/8/13 上午12:40'
@@ -16,6 +16,9 @@ def create_blueprint_v1():
 
     classic.api.register(bp_v1)
     book.api.register(bp_v1)
+    client.api.register(bp_v1)
+    token.api.register(bp_v1)
+    like.api.register(bp_v1)
     return bp_v1
 
 
