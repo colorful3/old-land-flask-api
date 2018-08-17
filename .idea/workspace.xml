@@ -56,10 +56,13 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="606">
-                <caret line="83" column="34" lean-forward="true" selection-start-line="83" selection-start-column="34" selection-end-line="83" selection-end-column="34" />
-                <folding />
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="511">
+                <caret line="129" column="3" lean-forward="true" selection-start-line="129" selection-start-column="3" selection-end-line="129" selection-end-column="3" />
+                <folding>
+                  <marker date="1534526988000" expanded="true" signature="2385:2512" ph="{...}" />
+                  <marker date="1534526988000" expanded="true" signature="2873:3000" ph="{&quot;error_code&quot;: 40029...}" />
+                </folding>
               </first_editor>
               <second_editor />
             </state>
@@ -528,7 +531,7 @@
         <state relative-caret-position="170">
           <caret line="12" column="4" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
           <folding>
-            <element signature="e#82#113#0" expanded="true" />
+            <element signature="e#82#113#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -719,7 +722,7 @@
         <state relative-caret-position="396">
           <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="19" />
           <folding>
-            <element signature="e#23#67#0" expanded="true" />
+            <element signature="e#23#67#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -799,17 +802,20 @@
         <state relative-caret-position="220">
           <caret line="17" column="37" lean-forward="true" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
           <folding>
-            <element signature="e#23#61#0" expanded="true" />
+            <element signature="e#23#61#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="606">
-            <caret line="83" column="34" lean-forward="true" selection-start-line="83" selection-start-column="34" selection-end-line="83" selection-end-column="34" />
-            <folding />
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="511">
+            <caret line="129" column="3" lean-forward="true" selection-start-line="129" selection-start-column="3" selection-end-line="129" selection-end-column="3" />
+            <folding>
+              <marker date="1534526988000" expanded="true" signature="2385:2512" ph="{...}" />
+              <marker date="1534526988000" expanded="true" signature="2873:3000" ph="{&quot;error_code&quot;: 40029...}" />
+            </folding>
           </first_editor>
           <second_editor />
         </state>

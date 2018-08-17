@@ -79,6 +79,54 @@
     * [进行点赞](README.md#进行点赞)
     * [取消点赞](README.md#取消点赞)
     
-- [小程序登录](README.md小程序登录)
+- [小程序登录](README.md#小程序登录)
     * [获取token](README.md#获取token)
     * [验证token](README.md#验证token)
+    
+    
+# 期刊
+
+## 获取最新一期
+URL:  
+>GET    /classic/latest
+
+Response 200:
+```json
+{
+    "error_code": 40029,
+    "msg": "invalid code, hints: [ req_id: IIPogA00872156 ]",
+    "request": "POST /v1/token/mina"
+}
+```
+
+Response_description:
+* content：期刊内容
+* fav_nums: 点赞次数
+* image: 图片
+* index: 期号
+* like_status: 是否点赞
+* pubdate: 发布日期
+* title: 期刊题目
+* type: 期刊类型,这里的类型分为:100 电影 200 音乐 300 句子
+* id: 期刊在数据中序号，供点赞使用
+* 返回期刊的详细信息
+
+## 获取当前一期的下一期
+URL:
+>GET   /classic/<int:index>/next
+
+Parameters:
+
+* id：id号,必填,必须是正整数
+* type:类型号，必填，为100,200,300的一种，分别表示电影，音乐，句子
+
+Response 200:
+```json
+{
+    "error_code": 40029,
+    "msg": "invalid code, hints: [ req_id: IIPogA00872156 ]",
+    "request": "POST /v1/token/mina"
+}
+```
+
+
