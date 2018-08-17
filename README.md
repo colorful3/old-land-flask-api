@@ -7,23 +7,21 @@
 
 # 返回码
  - HTTP状态码
-  
-========   ============================  =====================
-状态码             含义                  说明
-========   ============================  =====================
-200         OK                              请求成功
-201         CREATED                         创建成功
-202         ACCEPTED                        更新成功
-204         NO CONTENT                      删除成功
-301         MOVED PERMANENTLY               永久重定向
-400         BAD REQUEST                     请求包含不支持的参数
-401         UNAUTHORIZED                    未授权
-403         FORBIDDEN                       被禁止访问
-404         NOT FOUND                       请求的资源不存在
-413         REQUIRED LENGTH TOO LARGE       上传的File体积太大
-500         INTERNAL SERVER ERROR           内部错误
+ 
+|     状态码   |     含义                  |    说明           |
+| ----------- | ------------------------ | ----------------- |
+|  200        | OK                       |  请求成功           |
+|  201        | CREATED                  |  创建成功           |
+|  202        | ACCEPTED                 |  更新成功           |
+|  204        | NO CONTENT               |  删除成功           |
+|  301        | MOVED PERMANENTLY        |  永久重定向         |
+|  400        | BAD REQUEST              |  请求包含不支持的参数 |
+|  401        | UNAUTHORIZED             |  未授权             |
+|  403        | FORBIDDEN                |  被禁止访问          |
+|  404        | NOT FOUND                |  请求的资源不存在     |
+|  413        | REQUIRED LENGTH TOO LARGE|  上传的File体积太大  |
+|  500        | INTERNAL SERVER ERROR    |  内部错误           |
 
-========   ============================  =====================
 
 - 错误码
 
