@@ -268,3 +268,290 @@ Response 200:
     }
 ]
 ```
+
+
+
+
+## 获取热门书籍(概要)
+
+URL:
+
+>GET  /book/hot_list
+
+Response 200:
+
+```json
+[
+    {
+        "author": [
+            "Vamei"
+        ],
+        "fav_nums": 3,
+        "id": 13,
+        "image": "https://img1.doubanio.com/lpic/s29166309.jpg",
+        "like_status": 0,
+        "title": "从Python开始学编程"
+    },
+    {
+        "author": [
+            "MarkPilgrim"
+        ],
+        "fav_nums": 2,
+        "id": 5,
+        "image": "https://img3.doubanio.com/lpic/s4059293.jpg",
+        "like_status": 0,
+        "title": "Dive Into Python 3"
+    }
+]
+```
+
+
+## 获取书籍短评
+
+URL:
+
+>GET  /book/<int:book_id>/shot_comment
+
+Parameters:
+
+* book_id：书籍的id,必填,必须为正整数
+* Response 200:
+
+```json
+{
+    "book_id": 1,
+    "comment": [
+        {
+            "book_id": 1,
+            "content": "这个书不错",
+            "nums": 1
+        },
+        {
+            "book_id": 1,
+            "content": "而是的回忆！七龙珠",
+            "nums": 9
+        },
+        {
+            "book_id": 1,
+            "content": "回忆杀！",
+            "nums": 19
+        }
+    ]
+}
+```
+
+Response_description:
+
+* comment: 一个评论的列表,包含用户对书籍的评论及对应数量的字典
+* book_id: 书籍id
+
+
+
+Parameters:
+
+
+response_description:
+
+* fav_nums:点赞数
+* id: 书籍id
+* like_status: 是否点赞
+* author: 作者
+* title: 书籍题目
+* image: 书籍图片
+* 返回一个列表，包含所有热门书籍的概要信息
+
+
+## 获取喜欢书籍数量
+
+URL:
+
+>GET  /book/favor/count
+
+Parameters:
+* token
+```json
+{
+    "count": 1
+}
+```
+Response_description:
+
+* count: 返回我喜欢的书籍数量
+
+
+## 获取喜欢书籍数量
+
+URL:
+
+>GET      /book/<int:book_id>/favor
+
+Parameters:
+
+* book_id：书籍的id,必填,必须为正整数
+
+Response 200:
+
+```json
+{
+    "fav_nums": 0,
+    "id": 1,
+    "like_status": 0
+}
+```
+
+
+## 新增短评
+
+URL:
+
+>POST  /book/add/comment
+
+Parameters:
+
+* book_id：书籍id
+* content：评论内容,我们可允许的评论内容范围为12字以内
+
+Response 201:
+```json
+{
+    "error_code": 0,
+    "msg": "OK",
+    "request": "POST /v1/book/add/short_comment"
+}
+```
+
+## 书籍搜索
+
+URL:
+>GET  /book/search
+
+> demo1 /book/search?q=七龙珠
+
+> demo2  /book/search?q=七龙珠&summary=1
+
+Parameters:
+
+* start: 开始记录数，默认为0
+* count: 记录条数，默认为20,超过依然按照20条计算
+* summary: 返回完整或简介,默认为0,0为完整内容,1为简介
+* q:搜索内容
+
+Response 200:
+
+当summary=0,返回详细数据:
+
+
+```json
+{
+    "books": [
+        {
+            "author": [
+                "[日]鸟山明"
+            ],
+            "category": "日本漫画",
+            "id": 17699,
+            "image": "https://img1.doubanio.com/lpic/s28671937.jpg",
+            "isbn": "9787600100354",
+            "pages": "全42册",
+            "price": "367.6",
+            "pubdate": "2005-7-1",
+            "publisher": "中国少年儿童出版社",
+            "subtitle": "",
+            "summary": "《DRAGON BALL》译名《龙珠》（又名：七龙珠）是日本著名漫画家鸟山明的得意作品，1984年登场，1992年又推出『龙珠』续集。这部长篇巨作在『少年跳跃』上连载7年。\\n故事讲述了孙悟空（当然不是我们神化中的那个齐天大圣喽）父子和那7颗能满足人们心愿的龙珠，把读者从山村引到城市，从地球引到外星，又从现在引到未来。\\n根据《龙珠》的漫画故事，还推出了《龙珠》的系列动画片，无论是TV版还是剧场版，都吸引了无数的龙珠迷，掀起了一股股“龙珠”的热潮。\\n龙珠的舞台，虽说是带有中国色彩的，但是也并非就限定在中国；时代也一样，并没有把它固定在某一个具体时间。整个故事架构很简单，至于一些细节和结局，我想任其自由发展。这么一来，连我自己也会想[故事下一步会怎么发展啊]，并为之捏了一把汗。因为无论怎么发挥都可以，所以乐在其中。\\n传说中，地球四处散落着7颗龙珠。如果谁将他们收集起来就可以实现自己的愿望，人们为了得到它而不断的你争我夺……每年都会有一场以龙珠为奖品的《天下第一武道大会》……在地球的一个角落，生活着孙悟空这个茁壮的孩子，他的身份其实是赛亚人卡卡罗特。因为婴儿时的变身能力不够而被派往地球，其实是为了毁灭地球生物而变成殖民地，但他生来和平，丝毫不知自己的身世……这种战斗力超强的种族“赛亚人”与宇宙中另一些种族“那美克星人”等等间发生了无数惊险有趣又富有教育意义的故事……这就是日本著名漫画家“鸟山明”创造的《七龙珠》世界。",
+            "title": "龙珠(全42册)",
+            "translator": [
+                "牟琳"
+            ]
+        },
+        {
+            "author": [
+                "[日]鸟山明"
+            ],
+            "category": "日本漫画",
+            "id": 18569,
+            "image": "https://img3.doubanio.com/lpic/s11231433.jpg",
+            "isbn": "9787500774860",
+            "pages": "175",
+            "price": "6.9",
+            "pubdate": "2005-7",
+            "publisher": "中国少年儿童出版社",
+            "subtitle": "孙悟空和伙伴们",
+            "summary": "《龙珠(套装共42册)》是日本著名漫画家鸟山明的得意作品。相传，有七颗龙珠散落在世界的各个角落，当它们被聚集到一起时神龙就会出现，能够实现你的任何一个愿望。这个一个美丽的的传说引出了小悟空和他的朋友们寻找龙珠的故事。",
+            "title": "龙珠1",
+            "translator": [
+                "牟琳"
+            ]
+        }
+    ],
+    "count": 20,
+    "start": 0,
+    "total": 2
+}
+```
+
+当summary=1,返回概要数据:
+
+```json
+{
+    "books": [
+        {
+            "author": [
+                "[日]鸟山明"
+            ],
+            "id": 17699,
+            "image": "https://img1.doubanio.com/lpic/s28671937.jpg",
+            "isbn": "9787600100354",
+            "price": "367.6",
+            "title": "龙珠(全42册)"
+        },
+        {
+            "author": [
+                "[日]鸟山明"
+            ],
+            "id": 18569,
+            "image": "https://img3.doubanio.com/lpic/s11231433.jpg",
+            "isbn": "9787500774860",
+            "price": "6.9",
+            "title": "龙珠1"
+        }
+    ],
+    "count": 20,
+    "start": 0,
+    "total": 2
+}
+```
+
+
+## 获取书籍详细信息
+
+URL:
+
+>GET  /book/<id>/detail
+
+>demo /book/6548683/detail
+
+Parameters:
+
+id: 书籍的id号，从豆瓣API获取
+
+Response 200:
+
+```json
+{
+    "author": [
+        "申音"
+    ],
+    "category": "",
+    "id": "6548683",
+    "image": "https://img1.doubanio.com/view/subject/m/public/s6569607.jpg",
+    "isbn": "9787807674030",
+    "pages": "262",
+    "price": "35.00元",
+    "pubdate": "2011-7-1",
+    "publisher": "山西经济出版社",
+    "subtitle": "为何普世商业价值在中国行不通",
+    "summary": "★为什么美国没有史玉柱，中国没有乔布斯？\n★什么是“对的行业”、“错的行业”？\n★我们需要什么样的营销？\n★老板为什么要读商学院？\n★山寨公司还需要管理吗？\n★资源问题是个“伪问题”？\n★别把商业模式当成葵花宝典\n★给海归技术创业兄弟的九个忠告\n★在一个不伟大的行业里，做一个伟大的公司\n★是什么让互联网遭遇了有史以来最鸡犬不宁的一战？",
+    "title": "商业的常识",
+    "translator": ""
+}
+```

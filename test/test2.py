@@ -1,9 +1,6 @@
-# -*- coding: utf8 -*-
-from app.libs.enums import ClientTypeEnum
+import json
 
-__author__ = 'Colorful'
-__date__ = '2018/8/17 下午7:09'
+str = "[\"\\uff08\\u7f8e\\uff09  Y. Daniel Liang\"]"
 
-
-res = ClientTypeEnum(100)
-pass
+res = json.loads(str)
+print(res)

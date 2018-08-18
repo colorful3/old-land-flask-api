@@ -10,6 +10,7 @@ class ClassicEnums(Enum):
     CLASSIC_MOVIE = 100
     CLASSIC_MUSIC = 200
     CLASSIC_SENTENCE = 300
+    BOOK = 400
 
 
 class ClientTypeEnum(Enum):

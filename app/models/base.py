@@ -59,7 +59,17 @@ class Base(db.Model):
         return getattr(self, item)
 
     def keys(self):
-        return []
+        return self.fields
+
+    def hide(self, *keys):
+        for key in keys:
+            self.fields.remove(key)
+        return self
+
+    def append(self, *keys):
+        for key in keys:
+            self.fields.append(key)
+        return self
 
     @property
     def create_datetime(self):

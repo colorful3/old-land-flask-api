@@ -29,7 +29,7 @@ class AdminScope(Scope):
 
 class UserScope(Scope):
     allow_module = ['v1.like']
-    allow_api = ['get_favor_info', 'get_my_favor']
+    allow_api = ['get_favor_info', 'get_my_favor', 'add_comment', 'get_favor_num', 'favor_status']
 
     def __init__(self):
         pass

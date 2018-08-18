@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, Email, length, ValidationError
 
 from app.libs.enums import ClientTypeEnum, ClassicEnums
 from app.libs.error_code import NotFound
+from app.models.book import Book
 from app.models.classic import Classic
 from app.validaters.base import BaseForm as Form
 
@@ -85,3 +86,54 @@ class ClassicFavorForm(ClassicDetailForm):
         count = Classic.query.filter_by(id=field.data).count()
         if count < 1:
             raise NotFound(msg='such a classic was not found')
+
+
+class BookForm(Form):
+    book_id = IntegerField(validators=[
+        DataRequired()
+    ])
+
+    def validate_book_id(self, field):
+        count = Book.query.filter_by(id=field.data).count()
+        if count < 1:
+            raise NotFound(msg='数据库中没有找到该书籍')
+        return True
+
+
+class BookSearchForm(Form):
+    start = IntegerField(default=1)
+    count = IntegerField(default=20)
+    summary = IntegerField(default=0)
+    q = StringField(validators=[
+        DataRequired(message='请输入要检索的内容'),
+        length(1, 50)
+    ])
+
+
+class BookDetailForm(Form):
+    id = IntegerField(validators=[
+        DataRequired()
+    ])
+
+
+class CommentAdd(BookForm):
+
+    content = StringField(validators=[
+        DataRequired(message='评论内容不能为空'),
+        length(1, 12)
+    ])
+
+
+class LikeForm(Form):
+    art_id = IntegerField(validators=[
+        DataRequired()
+    ])
+    type = IntegerField(validators=[
+        DataRequired
+    ])
+
+    def validate_type(self, value):
+        try:
+            ClassicEnums(value.data)
+        except ValueError as e:
+            raise e

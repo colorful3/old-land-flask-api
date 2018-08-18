@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from flask import g
 from sqlalchemy import Column, Integer, Text, String, SmallInteger, ForeignKey, select, and_
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, reconstructor
 
 from app.models.base import Base
 from app.models.image import Image
@@ -27,9 +27,17 @@ class Classic(Base):
     type = Column(SmallInteger, default=100, comment='期刊类型,这里的类型分为:100 电影 200 音乐 300 句子')
     url = Column(String(100), default='', nullable=True, comment='当type为300时，此字段为音乐url')
 
+    @reconstructor
+    def __init__(self):
+        self.fields = [
+            'content', 'id', 'image_url',
+            'fav_nums', 'like_status',
+            'index', 'create_datetime',
+            'title', 'author',
+            'type', 'url']
+
     def keys(self):
-        return ['content', 'id', 'image_url', 'fav_nums', 'like_status',
-                'index', 'create_datetime', 'title', 'author', 'type', 'url']
+        return self.fields
 
     @property
     def latest(self):
