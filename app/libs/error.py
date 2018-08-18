@@ -11,7 +11,7 @@ __date__ = '2018/8/14 上午10:21'
 
 class APIException(HTTPException):
     code = 500
-    msg = 'We can not just think'
+    msg = 'Life can\'t always be colorful ￣□￣｜｜'
     error_code = 1006
 
     def __init__(self, code=None, msg=None, error_code=None, headers=None):

@@ -1,31 +1,23 @@
 # -*- coding: utf8 -*-
-from flask import Flask
+from datetime import date
+
+from flask import Flask as _Flask
+from flask.json import JSONEncoder as _JSONEncoder
+
+from app.libs.error_code import ServerError
 
 __author__ = 'Colorful'
 __date__ = '2018/8/13 上午12:41'
 
 
-def register_blueprints(app):
-    """
-    注册蓝图
-    :param app: flask核心对象
-    """
-    from app.api import create_blueprint_v1
-    app.register_blueprint(create_blueprint_v1(), url_prefix='/v1')
+class JSONEncoder(_JSONEncoder):
+    def default(self, o):
+        if hasattr(o, 'keys') and hasattr(o, '__getitem__'):
+            return dict(o)
+        if isinstance(o, date):
+            return o.strftime('%Y-%m-%d')
+        raise ServerError()
 
 
-def register_plugin(app):
-    # 注册sqlalchemy
-    from app.models.base import db
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
-
-
-def create_app():
-    app = Flask(__name__)
-    app.config.from_object('app.config.setting')
-    app.config.from_object('app.config.secure')
-    register_blueprints(app)
-    register_plugin(app)
-    return app
+class Flask(_Flask):
+    json_encoder = JSONEncoder

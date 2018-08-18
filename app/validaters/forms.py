@@ -1,10 +1,12 @@
 # -*- coding: utf8 -*-
-from wtforms import StringField
+from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired, Email, length, ValidationError
 
-from app.libs.enums import ClientTypeEnum
-from app.models.user import User
+from app.libs.enums import ClientTypeEnum, ClassicEnums
+from app.libs.error_code import NotFound
+from app.models.classic import Classic
 from app.validaters.base import BaseForm as Form
+
 __author__ = 'Colorful'
 __date__ = '2018/8/13 下午3:45'
 
@@ -25,7 +27,7 @@ class ClientForm(Form):
     ])
     se = StringField(validators=[
     ])
-    type = StringField(validators=[
+    type = IntegerField(validators=[
         DataRequired(message='type不能为空'),
     ])
 
@@ -42,3 +44,44 @@ class UserMinaForm(ClientForm):
     code = StringField(validators=[
         DataRequired(message='sorry, code is required!')
     ])
+
+
+class ClassicForm(Form):
+    index = IntegerField(validators=[
+        DataRequired()
+    ])
+
+    def validate_index(self, field):
+        if isinstance(field.data, int) and field.data > 0:
+            return True
+        else:
+            raise ValidationError('index must be positive integer')
+
+
+class ClassicDetailForm(Form):
+    id = IntegerField(validators=[
+        DataRequired()
+    ])
+    type = IntegerField(validators=[
+        DataRequired()
+    ])
+
+    def validate_id(self, field):
+        if isinstance(field.data, int) and field.data > 0:
+            return True
+        else:
+            raise ValidationError('id must be positive integer')
+
+    def validate_type(self, value):
+        try:
+            ClassicEnums(value.data)
+        except ValueError as e:
+            raise e
+
+
+class ClassicFavorForm(ClassicDetailForm):
+    def validate_id(self, field):
+        super(ClassicFavorForm, self).validate_id(field)
+        count = Classic.query.filter_by(id=field.data).count()
+        if count < 1:
+            raise NotFound(msg='such a classic was not found')

@@ -32,7 +32,7 @@ def verify_auth_token(token):
     try:
         data = s.loads(token)
     except BadSignature:
-        raise AuthFailed(msg='token is invalid')
+        raise AuthFailed(msg='token is invalid', error_code=1008)
     except SignatureExpired:
         raise AuthFailed(msg='token is expired', error_code=1009)
     uid = data['uid']

@@ -51,3 +51,10 @@ class Forbidden(APIException):
     code = 403
     msg = 'forbidden, not in scope'
     error_code = 1004
+
+
+class NotFound(APIException):
+    """资源没有找到"""
+    code = 404
+    msg = 'sorry, the resource was not found on the server'
+    error_code = 1002

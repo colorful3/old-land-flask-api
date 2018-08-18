@@ -4,7 +4,6 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 from app.libs.c_blueprints import CBlueprint
 from app.libs.enums import ClientTypeEnum
-from app.libs.error_code import Success
 from app.models.user import User
 from app.validaters.forms import UserMinaForm
 

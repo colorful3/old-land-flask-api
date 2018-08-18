@@ -96,9 +96,15 @@ URL:
 Response 200:
 ```json
 {
-    "error_code": 40029,
-    "msg": "invalid code, hints: [ req_id: IIPogA00872156 ]",
-    "request": "POST /v1/token/mina"
+    "content": "人生不能像做菜，把所有的材料准备好才下锅",
+    "fav_nums": 2,
+    "id": 8,
+    "image": "http://127.0.0.1:5000/v1/movie.2.png",
+    "index": 8,
+    "like_status": 0,
+    "pubdate": "2018-08-14",
+    "title": "李安《饮食男女》",
+    "type": 100
 }
 ```
 
@@ -118,18 +124,147 @@ Response_description:
 URL:
 >GET   /classic/<int:index>/next
 
+>demo  /classic/2/next
+
 Parameters:
 
 * id：id号,必填,必须是正整数
-* type:类型号，必填，为100,200,300的一种，分别表示电影，音乐，句子
 
 Response 200:
 ```json
 {
-    "error_code": 40029,
-    "msg": "invalid code, hints: [ req_id: IIPogA00872156 ]",
-    "request": "POST /v1/token/mina"
+    "content": "你陪我不如蝉夏 越过城市喧嚣",
+    "fav_nums": 0,
+    "id": 3,
+    "image": "http://127.0.0.1:5000/v1/music.2.png",
+    "index": 3,
+    "like_status": 0,
+    "pubdate": "2018-08-14",
+    "title": "花弼《纸短情长》",
+    "type": 200,
+    "url": "http://music.163.com/song/media/outer/url?id=557581284.mp3"
 }
 ```
 
+## 获取某一期详细信息
+URL:
+>GET   /classic/<int:type>/<int:id>
 
+>demo   /classic/200/1
+
+Parameters:
+
+* id：id号,必填,必须是正整数
+* type: 类型号，必填，为100,200,300的一种，分别表示电影，音乐，句子
+
+Response 200:
+```json
+{
+    "content": "岁月长，衣裳薄",
+    "fav_nums": 0,
+    "id": 1,
+    "image": "http://127.0.0.1:5000/v1/music.1.png",
+    "index": 1,
+    "like_status": 0,
+    "pubdate": "2018-08-14",
+    "title": "杨千嬅《再见二丁目》",
+    "type": 200,
+    "url": "http://music.163.com/song/media/outer/url?id=557581284.mp3"
+}
+```
+
+## 获取当前一期的上一期
+URL:
+>GET   /classic/<int:index>/next
+
+>demo /classic/5/next
+
+Parameters:
+* id：id号,必填,必须是正整数
+
+Response 200:
+```json
+{
+    "content": "在变换的生命里，岁月原来是最大的小偷",
+    "fav_nums": 0,
+    "id": 4,
+    "image": "http://127.0.0.1:5000/v1/movie.1.png",
+    "index": 4,
+    "like_status": 0,
+    "pubdate": "2018-08-14",
+    "title": "罗启锐《岁月神偷》",
+    "type": 100
+}
+```
+
+## 获取点赞信息
+
+URL:
+>GET   /classic/<int:type>/<int:id>/favor
+
+>demo /classic/200/7/favor
+
+Parameters:
+
+* id：id号,必填,必须是正整数
+* type: 类型号，必填，为100,200,300的一种，分别表示电影，音乐，句子
+* token: 通过 Basic Auth方式传递 username: eyJhbGciOiJIUzI1NiIsImlhdCI6MTUzNDUxODQ0MCwiZXhwIjoxNTM3MTEwNDQwfQ.eyJ1aWQiOjEsInR5cGUiOjIwMCwic2NvcGUiOiJVc2VyU2NvcGUifQ.S1YoU30kgUIwYRgyCVeDgL2VvYcTlmeGph6P9Vd2irg, password: ''
+
+Response 200:
+
+```json
+{
+    "fav_nums": 2,
+    "id": 7,
+    "like_status": 1
+}
+```
+
+## 获取我喜欢的期刊
+URL:
+>GET   /classic/favor
+
+Parameters:
+* token
+
+Response 200:
+
+```json
+[
+    {
+        "content": "人生不能像做菜，把所有的材料准备好才下锅",
+        "fav_nums": 2,
+        "id": 8,
+        "image": "http://127.0.0.1:5000/v1/movie.2.png",
+        "index": 8,
+        "like_status": 1,
+        "pubdate": "2018-08-14",
+        "title": "李安《饮食男女》",
+        "type": 100
+    },
+    {
+        "content": "谁念过 千字文章 秋收冬已藏",
+        "fav_nums": 2,
+        "id": 7,
+        "image": "http://127.0.0.1:5000/v1/music.4.png",
+        "index": 7,
+        "like_status": 1,
+        "pubdate": "2018-08-14",
+        "title": "不才《参商》",
+        "type": 200,
+        "url": "http://music.163.com/song/media/outer/url?id=557581284.mp3"
+    },
+    {
+        "content": "谁念过 千字文章 秋收冬已藏",
+        "fav_nums": 2,
+        "id": 7,
+        "image": "http://127.0.0.1:5000/v1/music.4.png",
+        "index": 7,
+        "like_status": 1,
+        "pubdate": "2018-08-14",
+        "title": "不才《参商》",
+        "type": 200,
+        "url": "http://music.163.com/song/media/outer/url?id=557581284.mp3"
+    }
+]
+```

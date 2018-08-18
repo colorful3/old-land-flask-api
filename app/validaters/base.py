@@ -12,9 +12,11 @@ __date__ = '2018/8/14 上午10:44'
 
 
 class BaseForm(Form):
-    def __init__(self):
-        data = request.json
-        super(BaseForm, self).__init__(data=data)
+    def __init__(self, data=None):
+        if data is None:
+            data = request.json
+        args = request.args.to_dict()
+        super(BaseForm, self).__init__(data=data, **args)
 
     def validate_for_api(self):
         """返回格式"""
