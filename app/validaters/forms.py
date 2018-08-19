@@ -128,8 +128,9 @@ class LikeForm(Form):
     art_id = IntegerField(validators=[
         DataRequired()
     ])
+
     type = IntegerField(validators=[
-        DataRequired
+        DataRequired()
     ])
 
     def validate_type(self, value):

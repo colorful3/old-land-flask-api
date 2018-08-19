@@ -555,3 +555,80 @@ Response 200:
     "translator": ""
 }
 ```
+
+# 点赞
+
+## 进行点赞
+URL:
+
+>POST  /like
+
+Parameters:
+
+* art_id: 点赞对象,例如你想对电影进行点赞，那这个参数就是电影的id号
+* type：点赞类型分为四种：100 电影 200 音乐 300 句子 400 书籍
+
+Response Status 201:
+
+```json
+{
+    "error_code": 0,
+    "msg": "OK",
+    "request": "POST /v1/like"
+}
+```
+
+## 取消点赞
+URL:
+>POST /like/cancel
+
+Parameters:
+
+* art_id: 点赞对象id
+* type：点赞类型
+
+Response Status 201:
+```json
+{
+    "error_code": 0,
+    "msg": "OK",
+    "request": "POST /v1/like"
+}
+```
+
+
+# 小程序登录
+
+## 获取token
+
+URL:
+>POST /token/mina
+
+Parameters:
+* code: wx.login API获取的code值。
+
+Response Status 200:
+```json
+{
+    "token" : "eyJhbGciOiJIUzI1NiIsImlhdCI6MTUzNDUxODQ0MCwiZXhwIjoxNTM3MTEwNDQwfQ.eyJ1aWQiOjEsInR5cGUiOjIwMCwic2NvcGUiOiJVc2VyU2NvcGUifQ.S1YoU30kgUIwYRgyCVeDgL2VvYcTlmeGph6P9Vd2irg"
+}
+```
+
+Response_description:
+
+* token: 供需要权限认证的接口请使用
+
+## 验证token
+
+Parameters:
+* token: 需要权限认证的接口请使用HTTP BASIC方式在header头中传递token，headers中的键名为 Authorization， 键值为 base64(basic token:'')
+
+Response Status 200:
+```json
+{
+    "error_code": 1008,
+    "msg": "token is invalid",
+    "request": "POST /v1/like/cancel"
+}
+```
+

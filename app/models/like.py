@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 from flask import g
-from sqlalchemy import Integer, Column, SmallInteger
+from sqlalchemy import Integer, Column, SmallInteger, orm
 
 from app.libs.enums import ClassicEnums
 from app.libs.error_code import Forbidden
@@ -17,10 +17,16 @@ class Like(Base):
     book_id = Column(Integer, default=0, comment='书籍id')
     type = Column(SmallInteger, default=100, comment='合理利用数据冗余，期刊类型')
 
+    @orm.reconstructor
+    def __init__(self):
+        self.fields = [
+            'id', 'uid', 'cid', 'book_id', 'type'
+        ]
+
     @staticmethod
-    def add(art_id, type):
+    def add_favor(art_id, type):
         uid = g.user.uid
-        if type == ClassicEnums.BOOK:
+        if type == ClassicEnums.BOOK.value:
             count = Like.query.filter_by(uid=uid, type=type, book_id=art_id).count()
         else:
             count = Like.query.filter_by(uid=uid, type=type, cid=art_id).count()
@@ -29,7 +35,7 @@ class Like(Base):
         with db.auto_commit():
             like = Like()
             like.uid = uid
-            if type == ClassicEnums.BOOK:
+            if type == ClassicEnums.BOOK.value:
                 like.book_id = art_id
             else:
                 like.cid = art_id
@@ -39,7 +45,8 @@ class Like(Base):
     @staticmethod
     def cancel(art_id, type):
         uid = g.user.uid
-        if type == ClassicEnums.BOOK:
-            Like.query.filter_by(uid=uid, type=type, book_id=art_id).delete()
-        else:
-            Like.query.filter_by(uid=uid, type=type, cid=art_id).delete()
+        with db.auto_commit():
+            if type == ClassicEnums.BOOK:
+                Like.query.filter_by(uid=uid, type=type, book_id=art_id).delete()
+            else:
+                Like.query.filter_by(uid=uid, type=type, cid=art_id).delete()

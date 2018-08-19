@@ -16,11 +16,12 @@ api = CBlueprint('like')
 @auth.login_required
 def add_like():
     form = LikeForm().validate_for_api()
-    Like.add(form.art_id.data, form.type.data)
+    Like.add_favor(form.art_id.data, form.type.data)
     return Success()
 
 
 @api.route('/cancel', methods=['POST'])
+@auth.login_required
 def cancel_like():
     form = LikeForm().validate_for_api()
     Like.cancel(form.art_id.data, form.type.data)
