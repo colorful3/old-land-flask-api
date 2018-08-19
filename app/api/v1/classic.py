@@ -1,5 +1,4 @@
 # -*- coding: utf8 -*-
-
 from flask import jsonify
 
 from app.libs.c_blueprints import CBlueprint

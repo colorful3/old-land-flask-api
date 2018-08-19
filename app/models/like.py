@@ -31,7 +31,7 @@ class Like(Base):
         else:
             count = Like.query.filter_by(uid=uid, type=type, cid=art_id).count()
         if count > 0:
-            raise Forbidden(msg='You had already collection')
+            raise Forbidden(msg='You had already collection', error_code=2000)
         with db.auto_commit():
             like = Like()
             like.uid = uid

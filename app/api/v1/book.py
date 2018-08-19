@@ -6,9 +6,11 @@ from app.libs.c_blueprints import CBlueprint
 from app.libs.error_code import Success
 from app.libs.token_auth import auth
 from app.models.book import Book
+from app.models.keywords import Keywords
 from app.models.like import Like
 from app.spider.douban_book import DouBanBook
-from app.validaters.forms import BookSearchForm, BookDetailForm, CommentAdd, BookForm
+from app.validaters.forms import\
+    BookSearchForm, BookDetailForm, CommentAdd, BookForm
 from app.view_models.book import BookCollection
 
 __author__ = 'Colorful'
@@ -60,10 +62,13 @@ def add_comment():
     return Success()
 
 
-@api.route('/hot_keyword', methods=['POST'])
+@api.route('/hot_keyword', methods=['GET'])
 def get_hot_keyword():
-
-    pass
+    """TODO 使用redis管理热词"""
+    res = Keywords.query.filter_by().order_by(
+        Keywords.nums.desc()).limit(15).all()
+    result = [k_o.keyword for k_o in res]
+    return jsonify({"hot": result})
 
 
 @api.route('/search', methods=['GET'])
@@ -75,7 +80,9 @@ def search():
     q = form.q.data.strip()
     douban_book.search(q, form.start.data, form.count.data)
 
-    books.fill(douban_book, form.start.data, form.count.data, form.summary.data)
+    books.fill(
+        douban_book, form.start.data,
+        form.count.data, form.summary.data)
 
     return jsonify(books)
 

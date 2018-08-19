@@ -25,7 +25,10 @@ def get_mina_token():
     mina_code = form.code.data
     identify = promise[ClientTypeEnum(form.type.data)](mina_code)
     expiration = current_app.config['TOKEN_EXPIRATION']
-    token = generate_auth_token(identify['uid'], form.type.data, identify['scope'], expiration)
+    token = generate_auth_token(
+        identify['uid'], form.type.data,
+        identify['scope'], expiration
+    )
     t = {
         'token': token.decode('ascii')
     }

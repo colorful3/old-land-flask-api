@@ -85,7 +85,7 @@ class ClassicFavorForm(ClassicDetailForm):
         super(ClassicFavorForm, self).validate_id(field)
         count = Classic.query.filter_by(id=field.data).count()
         if count < 1:
-            raise NotFound(msg='such a classic was not found')
+            raise NotFound(msg='such a classic was not found', error_code=3000)
 
 
 class BookForm(Form):
@@ -96,7 +96,7 @@ class BookForm(Form):
     def validate_book_id(self, field):
         count = Book.query.filter_by(id=field.data).count()
         if count < 1:
-            raise NotFound(msg='数据库中没有找到该书籍')
+            raise NotFound(msg='book not found')
         return True
 
 

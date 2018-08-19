@@ -5,6 +5,7 @@ from app.libs.c_http import HTTP
 from app.libs.error_code import NotFound
 from app.models.base import db
 from app.models.book import Book
+from app.models.keywords import Keywords
 
 __author__ = 'Colorful'
 __date__ = '2018/8/19 上午12:32'
@@ -20,8 +21,12 @@ class DouBanBook:
 
     def search(self, keyword, page=1, count=20):
         count = 20 if count > 20 else count
-        url = self.keyword_url.format(keyword, count, self.calculate_start(page, count))
+        url = self.keyword_url.format(
+            keyword, count,
+            self.calculate_start(page, count)
+        )
         result = HTTP.get(url)
+        self.__add_keyword(keyword)
         self.__fill_collection(result)
 
     def get_by_id(self, book_id):
@@ -31,11 +36,25 @@ class DouBanBook:
             raise NotFound(msg='book not found')
         self.__fill_single(result)
 
+    @staticmethod
+    def __add_keyword(keyword):
+        res = Keywords.query.filter_by(
+            keyword=keyword).first()
+        k_o = Keywords()
+        if not res:
+            with db.auto_commit():
+                k_o.keyword = keyword
+                k_o.nums = 1
+                db.session.add(k_o)
+        else:
+            with db.auto_commit():
+                res.nums += 1
+
     def __fill_collection(self, data):
         if data:
             self.total = data['total']
             self.books = data['books']
-            self.dataPersistence()
+            # self.dataPersistence()
 
     def __fill_single(self, data):
         if data:
