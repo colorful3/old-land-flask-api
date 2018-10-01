@@ -5,6 +5,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="int.desc" />
+          <option value="int.asc" />
         </list>
       </option>
     </inspection_tool>

@@ -24,7 +24,7 @@ def get_latest():
 @api.route('/<int:index>/next', methods=['GET'])
 def get_next(index):
     form = ClassicForm(data={'index': index}).validate_for_api()
-    res = Classic.next(form.index.data)
+    res = Classic().next(form.index.data)
     classic = ClassicCollection()
     data = classic.fill_single(res)
     return jsonify(data)
@@ -33,7 +33,7 @@ def get_next(index):
 @api.route('/<int:index>/previous', methods=['GET'])
 def get_previous(index):
     form = ClassicForm(data={'index': index}).validate_for_api()
-    res = Classic.previous(form.index.data)
+    res = Classic().previous(form.index.data)
     classic = ClassicCollection()
     data = classic.fill_single(res)
     return jsonify(data)
@@ -42,7 +42,7 @@ def get_previous(index):
 @api.route('/<int:type>/<int:id>', methods=['GET'])
 def get_detail(type, id):
     form = ClassicDetailForm(data={'type': type, 'id': id}).validate_for_api()
-    res = Classic.detail(form.type.data, form.id.data)
+    res = Classic().detail(form.type.data, form.id.data)
     classic = ClassicCollection()
     data = classic.fill_single(res)
     return jsonify(data)
