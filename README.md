@@ -1,4 +1,15 @@
 # old-land-flask-api
+如果想要使用，请首先在config文件下添加机密配置文件secure.py：
+```python
+# 数据库配置文件
+SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:root@127.0.0.1/old_land'
+# 安全key
+SECRET_KEY = 'your secret key'
+# 小程序相关配置
+MINA_APPID = 'your mina appid'
+MINA_SECRET = 'your mina secret'
+MINA_LOGIN_URL = "https://api.weixin.qq.com/sns/jscode2session?appid={}&secret={}&js_code={}&grant_type=authorization_code"
+```
 # API说明
 * 点赞和取消点赞接口需要携带token
 * token必须通过小程序的code换取
